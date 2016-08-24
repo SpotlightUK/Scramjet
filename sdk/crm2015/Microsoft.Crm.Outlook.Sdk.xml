@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+	<assembly>
+		<name>Microsoft.Crm.Outlook.Sdk</name>
+	</assembly>
+	<members>
+		<member name="T:Microsoft.Crm.Outlook.Sdk.ClientState">
+			<summary>Contains the possible states for the <see cref="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.State"></see> property.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.BackgroundGoingOffline">
+			<summary>The background synchronization to the offline database is in progress. Value = 12.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.ClientLoadFailure">
+			<summary>There was a failure in loading pn_crm_for_outlook_short during pn_MS_Outlook_Short startup.Value = 6.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.ClientVersionHigher">
+			<summary>The pn_crm_for_outlook_short version is later than that on the server. Value = 8.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.ClientVersionLower">
+			<summary>The pn_crm_for_outlook_short version is earlier than that on the server. Value = 7.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Disable">
+			<summary>The pn_crm_for_outlook_short client is disabled. Value = 14.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.GoingOffline">
+			<summary>pn_crm_for_outlook_short is going offline. Value = 4.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.GoingOfflineCanceled">
+			<summary>The user canceled the go offline process.Value = 11.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.GoingOnline">
+			<summary>pn_crm_for_outlook_short is going online.Value = 5.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.NotConfigured">
+			<summary>The pn_crm_for_outlook_short client is not yet configured. Value = 13.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Offline">
+			<summary>pn_crm_for_outlook_short is offline. Value = 1.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Online">
+			<summary>pn_crm_for_outlook_short is online. Value = 0.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.OnlineCrmNotAvailable">
+			<summary>The pn_microsoftcrm server is not available. Value = 10.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.PostOfflineUpgrade">
+			<summary>pn_crm_for_outlook_short was upgraded while offline. Value = 9.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.SyncToOutlook">
+			<summary>pn_crm_for_outlook_short is currently synchronizing pn_MS_Outlook_Short with pn_microsoftcrm.Value = 2.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.SyncToOutlookError">
+			<summary>There was an error in the last synchronization between pn_MS_Outlook_Short and pn_microsoftcrm.Value = 3.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Unknown">
+			<summary>The state of the pn_crm_for_outlook_short client is unknown. Value = -1.</summary>
+		</member>
+		<member name="T:Microsoft.Crm.Outlook.Sdk.CrmOutlookService">
+			<summary>Provides methods for interacting with pn_crm_for_outlook_short.</summary>
+		</member>
+		<member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.#ctor">
+			<summary>Initializes a new instance of the <see cref="T:Microsoft.Crm.Outlook.Sdk.CrmOutlookService"></see> class.</summary>
+		</member>
+		<member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.GoOffline">
+			<summary>Takes pn_crm_outlook_offline_access into an offline state and triggers a synchronization of the offline database with the online server.</summary>
+		</member>
+		<member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.GoOnline">
+			<summary>Synchronizes pn_crm_outlook_offline_access with the online pn_microsoftcrm server.</summary>
+		</member>
+		<member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.SetOffline">
+			<summary>Sets pn_crm_outlook_offline_access into an offline state without triggering a synchronization of the offline database with the online server.</summary>
+		</member>
+		<member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.Sync(Microsoft.Crm.Outlook.Sdk.OutlookSyncType)">
+			<summary>Triggers a synchronization event between pn_crm_outlook_offline_access in pn_MS_Outlook_Full and the pn_microsoftcrm server.</summary>
+			<param name="syncType">Type: <see cref="T:Microsoft.Crm.Outlook.Sdk.OutlookSyncType"></see>. The target to which synchronization needs to be triggered: Outlook, the pn_microsoftcrm Address Book Provider or the Offline database. </param>
+		</member>
+		<member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.IsCrmClientLoaded">
+			<summary>Gets a value that indicates whether pn_crm_for_outlook_short is loaded by pn_MS_Outlook_Full.</summary>
+			<returns>Type: Returns_Booleantrue if pn_crm_for_outlook_short is loaded by pn_MS_Outlook_Full; otherwise, false.</returns>
+		</member>
+		<member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.IsCrmClientOffline">
+			<summary>Gets a value that indicates whether pn_crm_outlook_offline_access is offline.</summary>
+			<returns>Type: Returns_Booleantrue if pn_crm_outlook_offline_access is offline; otherwise, false.</returns>
+		</member>
+		<member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.IsCrmDesktopClient">
+			<summary>Gets a value that indicates whether pn_crm_for_outlook_short is installed. This version has no offline access.</summary>
+			<returns>Type: Returns_Booleantrue if pn_crm_for_outlook_short is installed; otherwise, false.</returns>
+		</member>
+		<member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.ServerUri">
+			<summary>Gets the server URI to use to connect to the pn_microsoftcrm server based on the state of pn_crm_for_outlook_short.</summary>
+			<returns>Type: Returns_URI
+the server URI to use to connect to the pn_microsoftcrm server based on the state of pn_crm_for_outlook_short.</returns>
+		</member>
+		<member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.State">
+			<summary>Gets the state of pn_crm_outlook_offline_access.</summary>
+			<returns>Type: <see cref="T:Microsoft.Crm.Outlook.Sdk.ClientState"></see>The state of pn_crm_outlook_offline_access.</returns>
+		</member>
+		<member name="T:Microsoft.Crm.Outlook.Sdk.OutlookSyncType">
+			<summary>Contains the possible synchronization type values that can be passed to the <see cref="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.Sync(Microsoft.Crm.Outlook.Sdk.OutlookSyncType)"></see> method to trigger a background synchronization operation.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.OutlookSyncType.AddressBook">
+			<summary>The pn_microsoftcrm Address Book Provider has to be synchronized with the data in pn_microsoftcrm. Value = 1.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.OutlookSyncType.Offline">
+			<summary>The user's offline database has to be synchronized with the data in pn_microsoftcrm. Value = 2.</summary>
+		</member>
+		<member name="F:Microsoft.Crm.Outlook.Sdk.OutlookSyncType.Outlook">
+			<summary>The user's pn_MS_Outlook_Short store has to be synchronized with the data in pn_microsoftcrm. Value = 0.</summary>
+		</member>
+	</members>
+</doc>

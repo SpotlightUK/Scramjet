@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Xrm.Tooling.CrmConnector.Powershell</name>
+    </assembly>
+    <members>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.BaseCmdLet.commonFileWriter">
+            <summary>
+            file Writer Link
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.BaseCmdLet.SetDiagnosticsMode">
+            <summary>
+            Determines if its necessary to enable tracing. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.BaseCmdLet.CleanUpDiagnosticsMode">
+            <summary>
+            Cleans up open TraceWriters
+            </summary>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.WriteInfoType">
+            <summary>
+            Type of write to use. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GeneralWriteInfo">
+            <summary>
+            holder class to signal handling to the cmdlet adapter writer. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GeneralWriteInfo.#ctor(System.String,Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.WriteInfoType)">
+            <summary>
+            Warning Message to write. 
+            </summary>
+            <param name="warningMessage"></param>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GeneralWriteInfo.Message">
+            <summary>
+             Warning message to write. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GeneralWriteInfo.MessageType">
+            <summary>
+            Type of Message in this class.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.PowerShellAdapter">
+            <summary>
+            Adapter Class
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.PowerShellAdapter.#ctor(System.Management.Automation.Cmdlet)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="cmdlet">cmdlet</param>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.PowerShellAdapter.Listen(System.TimeSpan)">
+            <summary>
+            Listener Method
+            </summary>
+            <param name="timeout">Time after which Operation will declared as Timed Out</param>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.State">
+            <summary>
+            Determines the State of the Running Import
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.deploymentregion">
+            <summary>
+            Deployment region
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.homerealmurl">
+            <summary>
+            Home Realm URI
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.onlinetype">
+            <summary>
+            Online Type
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.organizationname">
+            <summary>
+            Organization name
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.serverurl">
+            <summary>
+            Server URL to connect too. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.usercredential">
+            <summary>
+            User credential to use. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.profilename">
+            <summary>
+            Profile name used when auth data is stored. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.crmSvc">
+            <summary>
+            CrmSvcConnection
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.connProgress">
+            <summary>
+            Progress Record. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.errorRecord">
+            <summary>
+            Error Record if any. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ServerConfigKeys">
+            <summary>
+            Keys for the Server Config Info.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ConnMgr">
+            <summary>
+            Storage Access Object. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.queryforOrgs">
+            <summary>
+            set when querying for orgs. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.adapter">
+            <summary>
+            PowerShell MultiThreaded Adapter. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.percentCmp">
+            <summary>
+            Percentage completed. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ExecuteGetOrgs">
+            <summary>
+            Get Orgs. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ExecuteAuth">
+            <summary>
+            Run Auth. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.RunCrmAuth">
+            <summary>
+            Authenticate with CRM. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ConnMgr_ServerConnectionStatusUpdate(System.Object,Microsoft.Xrm.Tooling.CrmConnectControl.ServerConnectStatusEventArgs)">
+            <summary>
+            Status Alert from CRM.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ConnMgr_ConnectionCheckComplete(System.Object,Microsoft.Xrm.Tooling.CrmConnectControl.ServerConnectStatusEventArgs)">
+            <summary>
+            Connection check completed. 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.DoLoginWithControl">
+            <summary>
+            login using the UI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.UpdateServerConfigKeysFromPowerShell">
+            <summary>
+            Refresh the In memory data store from the UI
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.DeploymentRegion">
+            <summary>
+            The following is the definition of the input parameter "DeploymentRegion".       
+            This is the deployment region for CRM online to connect too
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.HomeRealmUrl">
+            <summary>
+            The following is the definition of the input parameter "HomeRealmUrl".       
+            URL to the WSTrust endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.OnLineType">
+            <summary>
+            The following is the definition of the input parameter "OnLineType".       
+            Online type. Options are Office365 or LiveID  this defaults to office 365,
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.OrganizationName">
+            <summary>
+            The following is the definition of the input parameter "OrganizationName".       
+            CRM Organization name to connect to
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ServerUrl">
+            <summary>
+            The following is the definition of the input parameter "ServerUrl".       
+            This is the URL to the CRM server.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.Credential">
+            <summary>
+            The following is the definition of the input parameter "UserCredential".       
+            User credential used to login to CRM
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.ProfileName">
+            <summary>
+            The following is the definition of the input parameter "OrganizationName".       
+            CRM Organization name to connect to
+            </summary>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.CommonAuth.OnlineType">
+            <summary>
+            Type of Online upgrade. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.SecureStringExtensions">
+            <summary>
+            Adds a extension to Secure string
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.SecureStringExtensions.ToUnsecureString(System.Security.SecureString)">
+            <summary>
+            DeCrypt a Secure password 
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GetCrmConnectionCommand">
+            <summary>
+            this will establish a CRM connection
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GetCrmConnectionCommand.XamlResourceName">
+            <summary>
+            Xaml Resource file name. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GetCrmConnectionCommand.BeginProcessing">
+            <summary>
+            PreInitializion 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GetCrmConnectionCommand.ProcessRecord">
+            <summary>
+            ProcessRecord method.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GetCrmConnectionCommand.InteractiveMode">
+            <summary>
+            SHow UI
+            </summary>
+        </member>
+        <member name="P:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GetCrmConnectionCommand.OrganizationName">
+            <summary>
+            The following is the definition of the input parameter "OrganizationName".       
+            CRM Organization name to connect to
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.Commands.GetOrganizations.ProcessRecord">
+            <summary>
+            Processes the request. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg">
+            <summary>
+            Interaction logic for LoginControl.xaml
+            </summary>
+            <summary>
+            LoginControlDlg
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.CrmSvc">
+            <summary>
+            DynamicsCrm.Connector services
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.bIsConnectedComplete">
+            <summary>
+            Bool flag to determine if there is a connection 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.CrmConnectMgr">
+            <summary>
+            CRM Connection Manager component. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.CrmLoginCtrl_ConnectionCheckBegining(System.Object,System.EventArgs)">
+            <summary>
+             Login control connect check starting. 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.CrmLoginCtrl_ConnectionStatusEvent(System.Object,Microsoft.Xrm.Tooling.CrmConnectControl.ConnectStatusEventArgs)">
+            <summary>
+            Login control connect check status event. 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.CrmLoginCtrl_ConnectErrorEvent(System.Object,Microsoft.Xrm.Tooling.CrmConnectControl.ConnectErrorEventArgs)">
+            <summary>
+            Login control Error event. 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.CrmLoginCtrl_UserCancelClicked(System.Object,System.EventArgs)">
+            <summary>
+            Login Control Cancel event raised. 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Microsoft.Xrm.Tooling.CrmConnector.Powershell.LoginControl.LoginControlDlg.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

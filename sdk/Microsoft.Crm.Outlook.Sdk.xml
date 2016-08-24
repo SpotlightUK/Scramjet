@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc xmlns:caps="http://schemas.microsoft.com/build/caps/2013/11" xmlns:mref="urn:mref-extensions">
+  <assembly>
+    <name>Microsoft.Crm.Outlook.Sdk</name>
+  </assembly>
+  <members>
+    <member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.#ctor">
+      <summary>
+        <para>Initializes a new instance of the <see cref="T:Microsoft.Crm.Outlook.Sdk.CrmOutlookService" /> class.</para>
+      </summary>
+      <remarks />
+    </member>
+    <member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.GoOffline">
+      <summary>
+        <para>Takes Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access into an offline state and triggers a synchronization of the offline database with the online server.</para>
+      </summary>
+      <remarks>
+        <para>This method is synchronous and triggers UI interaction with the user. If there are errors when taking Dynamics CRM for Outlook offline, the method will not return until the error dialog box is dismissed.</para>
+        <para>Because this function triggers UI interaction with the user it cannot be used within a plugin. This can cause the process to stop responding or cause unexpected behavior.</para>
+        <para>Throws an <languageKeyword>InvalidOperationException</languageKeyword> if the client is not loaded, Dynamics CRM for Outlook client (no offline access) is installed or if the client is offline.</para>
+      </remarks>Sample: Use Outlook Methods</member>
+    <member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.GoOnline">
+      <summary>
+        <para>Synchronizes Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access with the online Microsoft Dynamics CRM server.</para>
+      </summary>
+      <remarks>
+        <para>Replays all the operations that were performed while Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access was offline to the server. This method is synchronous and triggers UI interaction with the user. If there are errors during the playback, the method will not return until the error dialog box is dismissed.</para>
+        <para>Because this function triggers UI interaction with the user it cannot be used within a plugin. This can cause the process to stop responding or cause unexpected behavior.</para>
+        <para>Throws an <languageKeyword>InvalidOperationException</languageKeyword> if the client is not loaded, Dynamics CRM for Outlook client (no offline access) is installed or if the client is offline.</para>
+      </remarks>Sample: Use Outlook Methods</member>
+    <member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.SetOffline">
+      <summary>
+        <para>Sets Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access into an offline state without triggering a synchronization of the offline database with the online server.</para>
+      </summary>
+      <remarks>
+        <para>Throws an <languageKeyword>InvalidOperationException</languageKeyword> if the client is not loaded, Dynamics CRM for Outlook client (no offline access) is installed or if the client is offline.</para>
+      </remarks>Sample: Use Outlook Methods</member>
+    <member name="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.Sync(Microsoft.Crm.Outlook.Sdk.OutlookSyncType)">
+      <summary>
+        <para>Triggers a synchronization event between Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access in Microsoft Office Outlook and the Microsoft Dynamics CRM server.</para>
+      </summary>
+      <param name="syncType">
+        <para>Type: <see cref="T:Microsoft.Crm.Outlook.Sdk.OutlookSyncType" />. The target to which synchronization needs to be triggered: Outlook, the Microsoft Dynamics CRM Address Book Provider or the Offline database. </para>
+      </param>
+      <remarks>
+        <para>Triggers a synchronization event between Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access and the Microsoft Dynamics CRM Server. The synchronization occurs in the background and there is no user interaction. If there is a failure during synchronization there is no feedback provided. The method is synchronous and will not return until the synchronization operation is completed.</para>
+        <para>Throws an <languageKeyword>InvalidOperationException</languageKeyword> if the client is not loaded, Dynamics CRM for Outlook client (no offline access) is installed or if the client is offline.</para>
+        <para>Throws an <languageKeyword>ArgumentException</languageKeyword> if the <paramref name="syncType" /> is not supported.</para>
+      </remarks>Sample: Use Outlook Methods</member>
+    <member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.IsCrmClientLoaded">
+      <summary>
+        <para>Gets a value that indicates whether Dynamics CRM for Outlook is loaded by Microsoft Office Outlook.</para>
+      </summary>
+      <returns>
+        <para>Type: <see href="https://msdn.microsoft.com/library/system.boolean.aspx">Boolean</see>true if Dynamics CRM for Outlook is loaded by Microsoft Office Outlook; otherwise, false.</para>
+      </returns>
+      <remarks>
+        <para />
+      </remarks>Sample: Use Outlook Methods</member>
+    <member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.IsCrmClientOffline">
+      <summary>
+        <para>Gets a value that indicates whether Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access is offline.</para>
+      </summary>
+      <returns>
+        <para>Type: <see href="https://msdn.microsoft.com/library/system.boolean.aspx">Boolean</see>true if Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access is offline; otherwise, false.</para>
+      </returns>
+      <remarks />Sample: Use Outlook Methods</member>
+    <member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.IsCrmDesktopClient">
+      <summary>
+        <para>Gets a value that indicates whether Dynamics CRM for Outlook is installed. This version has no offline access.</para>
+      </summary>
+      <returns>
+        <para>Type: <see href="https://msdn.microsoft.com/library/system.boolean.aspx">Boolean</see>true if Dynamics CRM for Outlook is installed; otherwise, false.</para>
+      </returns>
+      <remarks />Sample: Use Outlook Methods</member>
+    <member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.ServerUri">
+      <summary>
+        <para>Gets the server URI to use to connect to the Microsoft Dynamics CRM server based on the state of Dynamics CRM for Outlook.</para>
+      </summary>
+      <returns>
+        <para>Type: <see href="https://msdn.microsoft.com/library/system.uri.aspx">URI</see>
+the server URI to use to connect to the Microsoft Dynamics CRM server based on the state of Dynamics CRM for Outlook.</para>
+      </returns>
+      <remarks />Sample: Use Outlook Methods</member>
+    <member name="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.State">
+      <summary>
+        <para>Gets the state of Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access.</para>
+      </summary>
+      <returns>
+        <para>Type: <see cref="T:Microsoft.Crm.Outlook.Sdk.ClientState" />The state of Microsoft Dynamics CRM for Microsoft Office Outlook with Offline Access.</para>
+      </returns>
+      <remarks />Sample: Use Outlook Methods</member>
+    <member name="T:Microsoft.Crm.Outlook.Sdk.ClientState">
+      <summary>
+        <para>Contains the possible states for the <see cref="P:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.State" /> property.</para>
+      </summary>
+      <remarks />
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Unknown">
+      <summary>
+        <para>The state of the Dynamics CRM for Outlook client is unknown. Value = -1.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Online">
+      <summary>
+        <para>Dynamics CRM for Outlook is online. Value = 0.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Offline">
+      <summary>
+        <para>Dynamics CRM for Outlook is offline. Value = 1.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.SyncToOutlook">
+      <summary>
+        <para>Dynamics CRM for Outlook is currently synchronizing Microsoft Outlook with Microsoft Dynamics CRM.Value = 2.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.SyncToOutlookError">
+      <summary>
+        <para>There was an error in the last synchronization between Microsoft Outlook and Microsoft Dynamics CRM.Value = 3.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.GoingOffline">
+      <summary>
+        <para>Dynamics CRM for Outlook is going offline. Value = 4.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.GoingOnline">
+      <summary>
+        <para>Dynamics CRM for Outlook is going online.Value = 5.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.ClientLoadFailure">
+      <summary>
+        <para>There was a failure in loading Dynamics CRM for Outlook during Microsoft Outlook startup.Value = 6.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.ClientVersionLower">
+      <summary>
+        <para>The Dynamics CRM for Outlook version is earlier than that on the server. Value = 7.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.ClientVersionHigher">
+      <summary>
+        <para>The Dynamics CRM for Outlook version is later than that on the server. Value = 8.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.PostOfflineUpgrade">
+      <summary>
+        <para>Dynamics CRM for Outlook was upgraded while offline. Value = 9.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.OnlineCrmNotAvailable">
+      <summary>
+        <para>The Microsoft Dynamics CRM server is not available. Value = 10.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.GoingOfflineCanceled">
+      <summary>
+        <para>The user canceled the go offline process.Value = 11.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.BackgroundGoingOffline">
+      <summary>
+        <para>The background synchronization to the offline database is in progress. Value = 12.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.NotConfigured">
+      <summary>
+        <para>The Dynamics CRM for Outlook client is not yet configured. Value = 13.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.ClientState.Disable">
+      <summary>
+        <para>The Dynamics CRM for Outlook client is disabled. Value = 14.</para>
+      </summary>
+    </member>
+    <member name="T:Microsoft.Crm.Outlook.Sdk.CrmOutlookService">
+      <summary>
+        <para>Provides methods for interacting with Dynamics CRM for Outlook.</para>
+      </summary>
+      <remarks />Write Custom Code for Microsoft Dynamics CRM for OutlookSample: Use Outlook Methods</member>
+    <member name="T:Microsoft.Crm.Outlook.Sdk.OutlookSyncType">
+      <summary>
+        <para>Contains the possible synchronization type values that can be passed to the <see cref="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.Sync(Microsoft.Crm.Outlook.Sdk.OutlookSyncType)" /> method to trigger a background synchronization operation.</para>
+      </summary>
+      <remarks />
+      <seealso cref="M:Microsoft.Crm.Outlook.Sdk.CrmOutlookService.Sync(Microsoft.Crm.Outlook.Sdk.OutlookSyncType)" />
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.OutlookSyncType.Outlook">
+      <summary>
+        <para>The user's Microsoft Outlook store has to be synchronized with the data in Microsoft Dynamics CRM. Value = 0.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.OutlookSyncType.AddressBook">
+      <summary>
+        <para>The Microsoft Dynamics CRM Address Book Provider has to be synchronized with the data in Microsoft Dynamics CRM. Value = 1.</para>
+      </summary>
+    </member>
+    <member name="F:Microsoft.Crm.Outlook.Sdk.OutlookSyncType.Offline">
+      <summary>
+        <para>The user's offline database has to be synchronized with the data in Microsoft Dynamics CRM. Value = 2.</para>
+      </summary>
+    </member>
+  </members>
+</doc>
