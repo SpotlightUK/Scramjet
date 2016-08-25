@@ -67,7 +67,10 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityExtensions.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="NotifyEntityChangePlug.cs" />
+    <Compile Include="PluginExecutionContextExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PluginBase.cs" />
   </ItemGroup>

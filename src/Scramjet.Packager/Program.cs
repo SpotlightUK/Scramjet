@@ -12,6 +12,7 @@ using Microsoft.Xrm.Client.Services;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using Scramjet.CrmPlugins;
+using EntityExtensions = Scramjet.CrmPlugins.EntityExtensions;
 
 
 namespace Scramjet.Packager {
@@ -58,23 +59,31 @@ namespace Scramjet.Packager {
     }
 
     public class Program {
+        static OrganizationService crm;
 
         static void Main(string[] args) {
-            var crm = new OrganizationService(CrmConnection.Parse(ConfigurationManager.ConnectionStrings["crm"].ConnectionString));
+            crm = new OrganizationService(CrmConnection.Parse(ConfigurationManager.ConnectionStrings["crm"].ConnectionString));
 
 
-            //var qmq = new QueryExpression() { EntityName = "sdkmessage", ColumnSet = new ColumnSet("name") };
-            //var result = crm.RetrieveMultiple(qmq);
+            //var sq = new QueryByAttribute {
+            //    EntityName = "sdkmessageprocessingstep",
+            //    ColumnSet = new ColumnSet { AllColumns = true }
+            //};
+            //sq.Attributes.Add("name");
+            //sq.Values.Add("Scramjet.CrmPlugins.NotifyEntityChangePlugin: Update of contact");
+            //var result = crm.RetrieveMultiple(sq);
             //var messages = result.Entities;
-            //foreach(var m in messages) {
-            //    File.AppendAllText(@"d:\messages.csv", m.Attributes["name"] + "\t" + m.Id + Environment.NewLine);
+            //File.WriteAllText(@"d:\sdkmessagefilter.csv", "name\tid" + Environment.NewLine);
+            //foreach (var m in messages) {
+            //    File.AppendAllText(@"d:\sdkmessagefilter.csv", m.Attributes["name"] + "\t" + m.Id + Environment.NewLine);
             //    Console.WriteLine(m.Id);
-            //    foreach(var a in m.Attributes) {
-            //        Console.WriteLine("    " + a.Key + " : " + a.Value);
+            //    foreach (var a in m.Attributes) {
+            //        File.AppendAllText(@"d:\sdkmessagefilter.csv", "    " + a.Key + " : " + EntityExtensions.Flatten(a.Value));
+            //        Console.WriteLine("    " + a.Key + " : " + EntityExtensions.Flatten(a.Value));
             //    }
             //}
             //Console.WriteLine("Done");
-            //// Console.ReadKey(false);
+            //Console.ReadKey(false);
 
             //var publishAllXmlRequest = new PublishAllXmlRequest();
             //crm.Execute(publishAllXmlRequest);
@@ -105,7 +114,7 @@ namespace Scramjet.Packager {
                     Conditions = { new ConditionExpression("name", ConditionOperator.Equal, props[0]) }
                 }
             };
-            
+
             var results = crm.RetrieveMultiple(q);
             var existingAssembly = results.Entities.FirstOrDefault();
             Guid assemblyId;
@@ -142,23 +151,54 @@ namespace Scramjet.Packager {
                 pluginTypeId = crm.Create(pluginType);
             }
 
+            var sdkMessage = FindSdkMessageByName("Update");
+            var filter = FindOrCreateSdkMessageFilter("contact", sdkMessage);
 
             var step = new Entity("sdkmessageprocessingstep");
-            step["name"] = "Step Name Goes Here";
+            step["name"] = "Notify on Update of Contact";
             step["rank"] = 1;
             step["stage"] = new OptionSetValue(40);
             step["supporteddeployment"] = new OptionSetValue(0);
-            step["invocationsource"] = new OptionSetValue(0);
+            step["invocationsource"] = new OptionSetValue(1); // What does this signify? I do not know!
 
             step["plugintypeid"] = new EntityReference("plugintype", pluginTypeId);
             step["sdkmessageid"] = new EntityReference("sdkmessage", Guid.Parse("20bebb1b-ea3e-db11-86a7-000a3a5473e8")); //  Guid.Parse("9ebdbb1b-ea3e-db11-86a7-000a3a5473e8")));
-            //step["sdkmessagefilterid"] = new EntityReference("sdkmessagefilter", Guid.Empty);
+            step["mode"] = new OptionSetValue(1); // don't know... ?
+            step["configuration"] = "look at all these bees!";
+            step["sdkmessagefilterid"] = new EntityReference("sdkmessagefilter", filter.Id);
 
             var stepId = crm.Create(step);
             Console.WriteLine(stepId);
             Console.WriteLine("Done!");
             Console.ReadKey(false);
 
+        }
+
+        private static Entity FindSdkMessageByName(string name) {
+            var pluginTypeQuery = new QueryByAttribute {
+                EntityName = "sdkmessage",
+                ColumnSet = new ColumnSet { AllColumns = true }
+            };
+            pluginTypeQuery.Attributes.Add("name");
+            pluginTypeQuery.Values.Add(name);
+            return (crm.RetrieveMultiple(pluginTypeQuery).Entities.FirstOrDefault());
+
+        }
+        private static Entity FindOrCreateSdkMessageFilter(string entity, Entity sdkMessage) {
+            if (sdkMessage != null) {
+                var sdkMessageId = sdkMessage.Id;
+                var sdkMessageFilterQuery = new QueryByAttribute {
+                    EntityName = "sdkmessagefilter",
+                    ColumnSet = new ColumnSet { AllColumns = true }
+                };
+                sdkMessageFilterQuery.Attributes.Add("primaryobjecttypecode");
+                sdkMessageFilterQuery.Values.Add(entity);
+                sdkMessageFilterQuery.Attributes.Add("sdkmessageid");
+                sdkMessageFilterQuery.Values.Add(sdkMessageId);
+                var sdkMessageFilter = crm.RetrieveMultiple(sdkMessageFilterQuery).Entities.FirstOrDefault();
+                return (sdkMessageFilter);
+            }
+            return (null);
         }
     }
 }
