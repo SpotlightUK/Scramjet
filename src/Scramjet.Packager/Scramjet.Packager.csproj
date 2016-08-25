@@ -77,6 +77,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scramjet.CrmPlugins\Scramjet.CrmPlugins.csproj">
+      <Project>{56ACE05E-3756-4B7D-9B6F-672BB2FFC19B}</Project>
+      <Name>Scramjet.CrmPlugins</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

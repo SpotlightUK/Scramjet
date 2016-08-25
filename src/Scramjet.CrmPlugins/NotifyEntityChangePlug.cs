@@ -12,7 +12,7 @@ using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Messages;
 
 namespace Scramjet.CrmPlugins {
-    public class NotifyEntityChangePlug : PluginBase {
+    public class NotifyEntityChangePlugin : PluginBase {
         protected override void Execute(LocalPluginContext context) {
             var web = new WebClient();
             var pc = context.PluginExecutionContext;
