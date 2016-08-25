@@ -46,6 +46,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\sdk\crm2015\Microsoft.Xrm.Sdk.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -68,9 +72,20 @@
     <Compile Include="PluginBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="scramjet.snk" />
+    <None Include="packages.config" />
+    <None Include="scramjet.snk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir $(TargetDir)ilmerged\
+$(SolutionDir)packages\ilmerge.2.14.1208\tools\ilmerge.exe ^
+    /out:$(TargetDir)ilmerged\%25projectName%25.dll ^
+    /keyfile:$(TargetDir)scramjet.snk ^
+    $(TargetDir)$(ProjectName).dll $(TargetDir)Newtonsoft.Json.dll
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
