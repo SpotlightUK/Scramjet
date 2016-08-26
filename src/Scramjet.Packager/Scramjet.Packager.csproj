@@ -67,8 +67,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrganizationServiceExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolutionExportType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="connectionstrings.secret">
