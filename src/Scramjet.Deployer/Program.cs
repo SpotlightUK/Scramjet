@@ -8,7 +8,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using Scramjet.CrmPlugins;
 
-namespace Scramjet.Packager {
+namespace Scramjet.Deployer {
     public class Program {
 
         static OrganizationService crm;
@@ -20,11 +20,11 @@ namespace Scramjet.Packager {
 
             var plugin = crm.RegisterPlugin(typeof(NotifyEntityChangePlugin), name, friendlyName);
 
-            var config = "http://requestb.in/1fwurhm1";
+            var config = "http://scramjet-ngrok-io-q8ektuhmsgm7.runscope.net/scramjet.axd";
             foreach (var message in new[] { "Create", "Update", "Delete" }) {
                 foreach (var entity in new[] { "contact", "account", "contract" }) {
                     var step = crm.RegisterPluginStep(plugin, message, entity, config);
-                    Console.Write($"Registered {step.Id} - '{step["name"]}'");
+                    Console.WriteLine($"Registered {step.Id} - '{step["name"]}'");
                 }
             }
         }

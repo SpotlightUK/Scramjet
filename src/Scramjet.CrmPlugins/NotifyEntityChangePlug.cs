@@ -29,7 +29,7 @@ namespace Scramjet.CrmPlugins {
             var editor = context.GetCurrentUser(org);
             var target = (context.InputParameters.Contains("Target") ? context.InputParameters["Target"] : new EntityReference("missing_target", Guid.Empty));
 
-            var change = new Notification(context, editor);
+            var change = new CrmEvent(context, editor);
             if (target is Entity) change.FieldChanges = ((Entity)target).ToFieldChanges();
 
             PostChangesToWebhook(change);

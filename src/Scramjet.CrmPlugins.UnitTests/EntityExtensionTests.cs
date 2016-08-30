@@ -38,22 +38,60 @@ namespace Scramjet.CrmPlugins.UnitTests {
         [Test]
         [TestCaseSource(nameof(TestDateValues))]
         public void Flatten_DateTime_Works(DateTime dt) {
-            EntityExtensions.Flatten(dt).ShouldBe(dt.ToString("O"));
+            EntityExtensions.Flatten(dt).ShouldBe(dt);
+        }
+
+        public object MakeThing() {
+            return (new {
+                name = "thing",
+                guid = Guid.Empty
+            });
+        }
+
+        [Test]
+        public void Things1() {
+            var thing1 = MakeThing();
+            var thing2 = new { name = "thing", guid = Guid.Empty };
+            thing1.ShouldBe(thing2);
+        }
+        [Test]
+        public void Things2() {
+            var thing1 = MakeThing();
+            thing1.ShouldBe(new { name = "thing", guid = Guid.Empty });
         }
 
         [Test]
         public void Flatten_EntityReference() {
             var er = new EntityReference("contact", Guid.Empty);
             var s = EntityExtensions.Flatten(er);
-            s.ShouldBe("contact:00000000-0000-0000-0000-000000000000");
-        }
 
+            s.ShouldBe(new {
+                name = "contact",
+                id = Guid.Empty
+            });
+        }
+        [Test]
+        public void Fnord() {
+            Object value = new EntityReference("fnord", Guid.Empty);
+            var f = new {
+                name = ((EntityReference)value).LogicalName,
+                id = ((EntityReference)value).Id
+            };
+            var p = EntityExtensions.Flatten(value);
+            f.ShouldBe(p);
+            p.ShouldBe(f);
+            //f.ShouldBe(new {
+            //    name = "fnord",
+            //    id = Guid.Empty
+            //});
+        }
 
         [Test]
         [TestCaseSource(nameof(TestMoneyValues))]
         public void Flatten_Money(Decimal m) {
-            var s = EntityExtensions.Flatten(m);
-            s.ShouldBe(m.ToString(CultureInfo.InvariantCulture));
+            var cash = new Money(m);
+            var s = EntityExtensions.Flatten(cash);
+            s.ShouldBe(m);
         }
 
         [Test]
@@ -62,7 +100,7 @@ namespace Scramjet.CrmPlugins.UnitTests {
         [TestCase(Int32.MaxValue)]
         public void Flatten_OptionSetValue(Int32 v) {
             var osv = new OptionSetValue(v);
-            EntityExtensions.Flatten(osv).ShouldBe(v.ToString(CultureInfo.InvariantCulture));
+            EntityExtensions.Flatten(osv).ShouldBe(v);
         }
     }
 }
