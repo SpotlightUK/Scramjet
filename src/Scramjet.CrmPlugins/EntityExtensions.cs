@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Xrm.Sdk;
+using crm = Microsoft.Xrm.Sdk;
 
 namespace Scramjet.CrmPlugins {
     public static class EntityExtensions {
@@ -21,44 +22,36 @@ namespace Scramjet.CrmPlugins {
             return entity.Attributes.ToDictionary(e => e.Key, e => e.Value);
         }
 
-        public static readonly Dictionary<Type, Func<object, object>> formatters = new Dictionary<Type, Func<object, object>> {
-            {
-                typeof(EntityReference), value => new {
-                    name = ((EntityReference)value).LogicalName,
-                    id = Guid.Empty // ((EntityReference)value).Id
-                }
-            }, {
-                typeof(Money), value => ((Money)value).Value
-            },
-            {
-                typeof(OptionSetValue), value => ((OptionSetValue)value).Value
-            },
-            {
-                typeof(DateTime), value => (DateTime)value
-            },
-            {
-                typeof(DateTimeOffset), value => (DateTimeOffset)value
-            }
+        public static object FlattenEntityReference(crm.EntityReference value) {
+            return (new {
+                name = ((crm.EntityReference)value).LogicalName,
+                guid = ((crm.EntityReference)value).Id
+            });
+        }
+
+        private static readonly Dictionary<Type, Func<object, object>> Formatters = new Dictionary<Type, Func<object, object>> {
+            { typeof(Money), value => ((Money)value).Value },
+            { typeof(OptionSetValue), value => ((OptionSetValue)value).Value },
+            { typeof(DateTime), value => (DateTime)value },
+            { typeof(DateTimeOffset), value => (DateTimeOffset)value },
+            {typeof(EntityReference), value => new ScramjetEntityReference(
+                ((EntityReference)value).LogicalName,
+                ((EntityReference)value).Id
+                ) }
         };
 
-
-
-        public static Object Flatten(Object value) {
-            if (formatters.ContainsKey(value.GetType())) return (formatters[value.GetType()](value));
-            //if (value == null)
-            //    return null;
-            //if (value is EntityReference)
-            //    ;
-            //if (value is Money)
-            //    return;
-            //if (value is OptionSetValue)
-            //    return ;
-            //if (value is DateTime)
-            //    return ((DateTime)value);
-            //if (value is DateTimeOffset) {
-            //    return ((DateTimeOffset)value);
-            //}
-            return value.ToString();
+        public static object Flatten(Object value) {
+            return Formatters.ContainsKey(value.GetType()) ? (Formatters[value.GetType()](value)) : value;
         }
+    }
+
+    public struct ScramjetEntityReference {
+        public ScramjetEntityReference(string name, Guid guid) {
+            this.Name = name;
+            this.Guid = guid;
+        }
+        public string Name { get; set; }
+        public Guid Guid { get; set; }
+
     }
 }

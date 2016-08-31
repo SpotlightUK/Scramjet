@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.Xrm.Sdk;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using Shouldly;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -41,54 +42,19 @@ namespace Scramjet.CrmPlugins.UnitTests {
             EntityExtensions.Flatten(dt).ShouldBe(dt);
         }
 
-        public object MakeThing() {
-            return (new {
-                name = "thing",
-                guid = Guid.Empty
-            });
-        }
-
-        [Test]
-        public void Things1() {
-            var thing1 = MakeThing();
-            var thing2 = new { name = "thing", guid = Guid.Empty };
-            thing1.ShouldBe(thing2);
-        }
-        [Test]
-        public void Things2() {
-            var thing1 = MakeThing();
-            thing1.ShouldBe(new { name = "thing", guid = Guid.Empty });
-        }
-
         [Test]
         public void Flatten_EntityReference() {
             var er = new EntityReference("contact", Guid.Empty);
             var s = EntityExtensions.Flatten(er);
-
-            s.ShouldBe(new {
-                name = "contact",
-                id = Guid.Empty
+            s.ShouldBe(new ScramjetEntityReference() {
+                Name = "contact",
+                Guid = Guid.Empty
             });
-        }
-        [Test]
-        public void Fnord() {
-            Object value = new EntityReference("fnord", Guid.Empty);
-            var f = new {
-                name = ((EntityReference)value).LogicalName,
-                id = ((EntityReference)value).Id
-            };
-            var p = EntityExtensions.Flatten(value);
-            f.ShouldBe(p);
-            p.ShouldBe(f);
-            //f.ShouldBe(new {
-            //    name = "fnord",
-            //    id = Guid.Empty
-            //});
         }
 
         [Test]
         [TestCaseSource(nameof(TestMoneyValues))]
-        public void Flatten_Money(Decimal m) {
+        public void Flatten_Money(decimal m) {
             var cash = new Money(m);
             var s = EntityExtensions.Flatten(cash);
             s.ShouldBe(m);
@@ -98,7 +64,7 @@ namespace Scramjet.CrmPlugins.UnitTests {
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(Int32.MaxValue)]
-        public void Flatten_OptionSetValue(Int32 v) {
+        public void Flatten_OptionSetValue(int v) {
             var osv = new OptionSetValue(v);
             EntityExtensions.Flatten(osv).ShouldBe(v);
         }

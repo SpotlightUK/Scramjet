@@ -35,8 +35,9 @@ namespace Scramjet.CrmPlugins {
             PostChangesToWebhook(change);
         }
 
-        public void PostChangesToWebhook(object change) {
-            new WebClient().UploadString(unsecureConfigurationString, JsonConvert.SerializeObject(change));
+        private void PostChangesToWebhook(object change) {
+            var json = JsonConvert.SerializeObject(change, Formatting.Indented);
+            new WebClient().UploadString(unsecureConfigurationString, json);
         }
     }
 }
