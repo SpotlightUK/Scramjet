@@ -19,14 +19,7 @@ namespace Scramjet.CrmPlugins {
         }
 
         public static Dictionary<String, Object> ToFieldChanges(this Entity entity) {
-            return entity.Attributes.ToDictionary(e => e.Key, e => e.Value);
-        }
-
-        public static object FlattenEntityReference(crm.EntityReference value) {
-            return (new {
-                name = ((crm.EntityReference)value).LogicalName,
-                guid = ((crm.EntityReference)value).Id
-            });
+            return entity.Attributes.ToDictionary(e => e.Key, e => Flatten(e.Value));
         }
 
         private static readonly Dictionary<Type, Func<object, object>> Formatters = new Dictionary<Type, Func<object, object>> {
@@ -34,24 +27,15 @@ namespace Scramjet.CrmPlugins {
             { typeof(OptionSetValue), value => ((OptionSetValue)value).Value },
             { typeof(DateTime), value => (DateTime)value },
             { typeof(DateTimeOffset), value => (DateTimeOffset)value },
-            {typeof(EntityReference), value => new ScramjetEntityReference(
+            {typeof(EntityReference), value => new JsonEntityReference(
                 ((EntityReference)value).LogicalName,
                 ((EntityReference)value).Id
                 ) }
         };
 
         public static object Flatten(Object value) {
-            return Formatters.ContainsKey(value.GetType()) ? (Formatters[value.GetType()](value)) : value;
+            if (value == null) return (null);
+            return Formatters.ContainsKey(value.GetType()) ? (Formatters[value.GetType()](value)) : value.ToString();
         }
-    }
-
-    public struct ScramjetEntityReference {
-        public ScramjetEntityReference(string name, Guid guid) {
-            this.Name = name;
-            this.Guid = guid;
-        }
-        public string Name { get; set; }
-        public Guid Guid { get; set; }
-
     }
 }

@@ -46,9 +46,9 @@ namespace Scramjet.CrmPlugins.UnitTests {
         public void Flatten_EntityReference() {
             var er = new EntityReference("contact", Guid.Empty);
             var s = EntityExtensions.Flatten(er);
-            s.ShouldBe(new ScramjetEntityReference() {
-                Name = "contact",
-                Guid = Guid.Empty
+            s.ShouldBe(new JsonEntityReference() {
+                entityname = "contact",
+                entityguid = Guid.Empty
             });
         }
 
@@ -67,6 +67,13 @@ namespace Scramjet.CrmPlugins.UnitTests {
         public void Flatten_OptionSetValue(int v) {
             var osv = new OptionSetValue(v);
             EntityExtensions.Flatten(osv).ShouldBe(v);
+        }
+
+        [Test]
+        public void Flatten_Null_Works() {
+            EntityReference er = null;
+            var result = EntityExtensions.Flatten(er);
+            result.ShouldBe(null);
         }
     }
 }

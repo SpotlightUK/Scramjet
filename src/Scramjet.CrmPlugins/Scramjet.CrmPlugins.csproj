@@ -73,6 +73,7 @@
     <Compile Include="PluginExecutionContextExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PluginBase.cs" />
+    <Compile Include="JsonEntityReference.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
