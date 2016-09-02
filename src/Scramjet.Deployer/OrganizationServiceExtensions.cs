@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace Scramjet.Packager {
+namespace Scramjet.Deployer {
     public static class OrganizationServiceExtensions {
 
 

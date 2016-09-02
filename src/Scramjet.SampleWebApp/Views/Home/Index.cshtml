@@ -1,0 +1,14 @@
+﻿@model IEnumerable<string>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<h1>Scramjet Message Dump</h1>
+@foreach (var message in Model) {
+    <pre>@message</pre>
+    <hr/>
+}
+</body>
+</html>

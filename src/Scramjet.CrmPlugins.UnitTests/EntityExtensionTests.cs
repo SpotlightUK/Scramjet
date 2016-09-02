@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.Xrm.Sdk;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using Shouldly;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -38,31 +39,41 @@ namespace Scramjet.CrmPlugins.UnitTests {
         [Test]
         [TestCaseSource(nameof(TestDateValues))]
         public void Flatten_DateTime_Works(DateTime dt) {
-            EntityExtensions.Flatten(dt).ShouldBe(dt.ToString("O"));
+            EntityExtensions.Flatten(dt).ShouldBe(dt);
         }
 
         [Test]
         public void Flatten_EntityReference() {
             var er = new EntityReference("contact", Guid.Empty);
             var s = EntityExtensions.Flatten(er);
-            s.ShouldBe("contact:00000000-0000-0000-0000-000000000000");
+            s.ShouldBe(new JsonEntityReference() {
+                entityname = "contact",
+                entityguid = Guid.Empty
+            });
         }
-
 
         [Test]
         [TestCaseSource(nameof(TestMoneyValues))]
-        public void Flatten_Money(Decimal m) {
-            var s = EntityExtensions.Flatten(m);
-            s.ShouldBe(m.ToString(CultureInfo.InvariantCulture));
+        public void Flatten_Money(decimal m) {
+            var cash = new Money(m);
+            var s = EntityExtensions.Flatten(cash);
+            s.ShouldBe(m);
         }
 
         [Test]
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(Int32.MaxValue)]
-        public void Flatten_OptionSetValue(Int32 v) {
+        public void Flatten_OptionSetValue(int v) {
             var osv = new OptionSetValue(v);
-            EntityExtensions.Flatten(osv).ShouldBe(v.ToString(CultureInfo.InvariantCulture));
+            EntityExtensions.Flatten(osv).ShouldBe(v);
+        }
+
+        [Test]
+        public void Flatten_Null_Works() {
+            EntityReference er = null;
+            var result = EntityExtensions.Flatten(er);
+            result.ShouldBe(null);
         }
     }
 }

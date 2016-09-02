@@ -29,14 +29,15 @@ namespace Scramjet.CrmPlugins {
             var editor = context.GetCurrentUser(org);
             var target = (context.InputParameters.Contains("Target") ? context.InputParameters["Target"] : new EntityReference("missing_target", Guid.Empty));
 
-            var change = new Notification(context, editor);
+            var change = new CrmEvent(context, editor);
             if (target is Entity) change.FieldChanges = ((Entity)target).ToFieldChanges();
 
             PostChangesToWebhook(change);
         }
 
-        public void PostChangesToWebhook(object change) {
-            new WebClient().UploadString(unsecureConfigurationString, JsonConvert.SerializeObject(change));
+        private void PostChangesToWebhook(object change) {
+            var json = JsonConvert.SerializeObject(change, Formatting.Indented);
+            new WebClient().UploadString(unsecureConfigurationString, json);
         }
     }
 }

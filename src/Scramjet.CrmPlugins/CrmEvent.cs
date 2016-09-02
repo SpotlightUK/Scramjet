@@ -5,8 +5,9 @@ using System.Text;
 using Microsoft.Xrm.Sdk;
 
 namespace Scramjet.CrmPlugins {
-    public class Notification {
-        public Notification(IExecutionContext context, Entity editor) {
+    public class CrmEvent {
+        public CrmEvent() { }
+        public CrmEvent(IExecutionContext context, Entity editor) {
             MessageName = context.MessageName ?? "missing_message_name";
             CrmPluginDepth = context.Depth;
             CorrelationId = context.CorrelationId;
@@ -42,7 +43,7 @@ namespace Scramjet.CrmPlugins {
         public String MessageName { get; set; }
 
         /// <summary>A collection of fields, including the entity ID field and any fields affected by the change.</summary>
-        public Dictionary<String, String> FieldChanges { get; set; } = new Dictionary<String, String>();
+        public Dictionary<String, Object> FieldChanges { get; set; } = new Dictionary<String, Object>();
 
         public override String ToString() {
             var sb = new StringBuilder();
