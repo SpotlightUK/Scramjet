@@ -14,9 +14,11 @@ Deploying Scramjet
 - Edit `Scramjet.Deployer\Program.cs` and set `WEBHOOK_URL` to the URL where you're running your SampleWebApp instance - you'll need to include the path to `scramjet.axd` handler.
 - Create a file in the `Scramjet.Deployer` project folder called  `connectionstrings.secret` file containing the connection credentials for your CRM instance - this file is excluded from revision control so that you don't accidentally commit your CRM credentials to GitHub.Set this file to 'Copy to Output Directory = Copy Always' It should look like this:
 
-`<connectionStrings>`
-`<add name="crm" connectionString="Url=https://my-instance.crm4.dynamics.com;Username=me@my-org.onmicrosoft.com;Password=..." />` 
-`</connectionStrings>` 
+```
+<connectionStrings>
+<add name="crm" connectionString="Url=https://my-instance.crm4.dynamics.com;Username=me@my-org.onmicrosoft.com;Password=..." />
+</connectionStrings>
+```
 
 - Build and run Scramjet.Deployer.exe to compile the plugin and deploy it into your Dynamics CRM instance.
 - Edit some entities, and verify that you're getting HTTP notifications. By default it'll bind to the Create, Update and Delete events of the Contract, Contact and Account entities. 
